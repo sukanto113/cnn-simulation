@@ -35,7 +35,7 @@ def rkacem_system_method(T0, X0, h, getFunc, tol):
 
         SK4 = np.zeros(size)
         for j in range(0, size):
-            SK4[j] = h * getFunc(j)(T0 + h/2, X0 + SK1/12 - (25*SK2)/132 + (73*SK3/66))
+            SK4[j] = h * getFunc(j)(T0 + h, X0 + SK1/12 - (25*SK2)/132 + (73*SK3/66))
 
         XSh = X0 + ((2*h)/9) * ((SK1*SK1+SK1*SK2+SK2*SK2)/(SK1+SK2) + (SK2*SK2+SK2*SK3+SK3*SK3)/(SK2+SK3) + (SK3*SK3+SK3*SK4+SK4*SK4)/(SK3+SK4))
 
