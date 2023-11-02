@@ -208,7 +208,7 @@ class CNNSimulator:
         self.simulation_time = 2
         self.step_size = .5
         self.tol = .01
-        self.max_tolerable_dynamic = .01
+        self.min_tolerable_dynamic = .01
         self.states = np.array([cnn.state.reshape(cnn.size)])
         
         self._iteration_time_steps = np.array([0])
@@ -235,7 +235,7 @@ class CNNSimulator:
             getFunc=self.get_dynamic_function_at,
             ode_method=self.ode_method,
             tol=self.tol,
-            max_tolerable_dynamic=self.max_tolerable_dynamic)
+            min_tolerable_dynamic=self.min_tolerable_dynamic)
 
         end_time = time.time()
         

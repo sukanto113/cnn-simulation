@@ -2,10 +2,10 @@ import numpy as np
 import math
 
 # ode_system_algorithm
-def rk4_system_algorithm(t0, X0, tn, h, getFunc, ode_method, tol=100, max_tolerable_dynamic=-1):
+def rk4_system_algorithm(t0, X0, tn, h, getFunc, ode_method, tol=100, min_tolerable_dynamic=-1):
     """
-        stop algorithm iteration when max slop is less than stop_dynamic
-        and stop at tn.
+        stop the algorithm iteration when max slop is less than min_tolerable_dynamic,
+        or stop the algorithm at tn.
     """
     size = X0.shape[0]
     T = np.array([t0])
@@ -27,7 +27,7 @@ def rk4_system_algorithm(t0, X0, tn, h, getFunc, ode_method, tol=100, max_tolera
         for j in range(0, size):
             K[j] = getFunc(j)(T[i], XX[i])
         max_dynamic = np.max(abs(K))
-        if max_dynamic < max_tolerable_dynamic:
+        if max_dynamic < min_tolerable_dynamic:
             return (T, XX)
         
     h = tn - T[i-1]

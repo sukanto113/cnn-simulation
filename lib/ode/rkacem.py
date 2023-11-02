@@ -3,12 +3,12 @@ import math
 
 def rkacem_system_method(T0, X0, h, getFunc, tol):
     """
-        returns (X1, K1) where X1 is value at T0+h, and K1 is slop at T0.
-        K1 can be used to controll algorithm iteration
+        returns (Xh, h, h_next) where h is the time step used to advanced
+        the iteration, Xh is value at T0+h, and h_next is the next approximated 
+        optimum time step.
     """
     size = X0.shape[0]
     while True:
-        # Todo perform the loop operation in more efficient way
         K1 = np.zeros(size)
         for j in range(0, size):
             K1[j] = getFunc(j)(T0, X0)
@@ -40,10 +40,8 @@ def rkacem_system_method(T0, X0, h, getFunc, tol):
         XSh = X0 + ((2*h)/9) * ((SK1*SK1+SK1*SK2+SK2*SK2)/(SK1+SK2) + (SK2*SK2+SK2*SK3+SK3*SK3)/(SK2+SK3) + (SK3*SK3+SK3*SK4+SK4*SK4)/(SK3+SK4))
 
         errest = abs(XKh - XSh)* (281/13824)
-        # print(errest)
         delta = .84 * ((tol/errest)**0.25)
         
-        #Todo try to make a algorithm without the below line
         min_delta = np.min(delta)
         max_errest = np.max(errest)
         

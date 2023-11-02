@@ -26,7 +26,7 @@ def build_interactive_simulation_gui(simulator):
 
         simulator.step_size = step_size
         simulator.simulation_time = time
-        simulator.max_tolerable_dynamic = float(max_tol_dym)
+        simulator.min_tolerable_dynamic = float(max_tol_dym)
         simulator.tol = float(tol)
         simulator.ode_method = ode_methods[ode_method]
         simulator.simulate()
@@ -81,7 +81,7 @@ def build_button_simulation_gui(simulator):
         simulator.ode_method = ode_methods[ode_method_dropdown.value]
         simulator.step_size = float(step_size_slider.value)
         simulator.simulation_time = float(time_slider.value)
-        simulator.max_tolerable_dynamic = float(stop_dynamic_field.value)
+        simulator.min_tolerable_dynamic = float(stop_dynamic_field.value)
 
     def run_simulation_n(button):
         setup_simulator_properties_from_ui(simulator)
